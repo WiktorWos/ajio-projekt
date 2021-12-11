@@ -1,5 +1,6 @@
 package com.ajio.stats.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class UserStats {
     private Integer learnedNum;
 
     @OneToMany(mappedBy = "userStats")
+    @JsonManagedReference
     private List<TimeLogs> timeLogs;
 
     public Long getId() {
