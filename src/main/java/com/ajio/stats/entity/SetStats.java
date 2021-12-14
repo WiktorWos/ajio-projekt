@@ -1,5 +1,6 @@
 package com.ajio.stats.entity;
 
+import com.ajio.stats.dto.SetStatsDTO;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -15,8 +16,11 @@ public class SetStats {
     @Column(name = "set_id")
     private Long setID;
 
-    @Column(name = "accuracy")
-    private Integer accuracy;
+    @Column(name = "done_flahcards")
+    private Integer doneFlashcards;
+
+    @Column(name = "correct_flashcards")
+    private Integer correctFlashcards;
 
     public Long getId() {
         return id;
@@ -34,11 +38,19 @@ public class SetStats {
         this.setID = setID;
     }
 
-    public Integer getAccuracy() {
-        return accuracy;
+    public Integer getDoneFlashcards() {
+        return doneFlashcards;
     }
 
-    public void setAccuracy(Integer accuracy) {
-        this.accuracy = accuracy;
+    public void setDoneFlashcards(Integer doneFlashcards) {
+        this.doneFlashcards = doneFlashcards;
+    }
+
+    public Integer getCorrectFlashcards() {
+        return correctFlashcards;
+    }
+
+    public void setCorrectFlashcards(Integer correctFlashcards) {
+        this.correctFlashcards = correctFlashcards;
     }
 }

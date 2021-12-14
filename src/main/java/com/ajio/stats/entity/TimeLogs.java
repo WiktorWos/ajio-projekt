@@ -1,7 +1,5 @@
 package com.ajio.stats.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -18,10 +16,13 @@ public class TimeLogs {
     @Column(name = "recorded_minutes")
     private Integer minutes;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private UserStats userStats;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "user_id")
+//    @JsonBackReference
+//    private UserStats userStats;
+
+    @Column(name = "stats_id")
+    private Long userID;
 
     public Long getId() {
         return id;
@@ -47,11 +48,11 @@ public class TimeLogs {
         this.minutes = minutes;
     }
 
-    public UserStats getUserStats() {
-        return userStats;
+    public Long getUserID() {
+        return userID;
     }
 
-    public void setUserStats(UserStats userStats) {
-        this.userStats = userStats;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 }

@@ -1,14 +1,17 @@
 package com.ajio.stats.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.ajio.stats.dto.SetStatsDTO;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "user_stats")
-public class UserStats {
+public class UserStats implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,15 +20,18 @@ public class UserStats {
     @Column(name = "user_id")
     private Long userID;
 
-    @Column(name = "accuracy")
-    private Integer accuracy;
+    @Column(name = "done_flashcards")
+    private Integer doneFlashcards;
+
+    @Column(name = "correct_flashcards")
+    private Integer correctFlashcards;
 
     @Column(name = "learned_num")
     private Integer learnedNum;
 
-    @OneToMany(mappedBy = "userStats")
-    @JsonManagedReference
-    private List<TimeLogs> timeLogs;
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "stats_id", referencedColumnName="id")
+    private List<TimeLogs> timeLogs = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -43,12 +49,20 @@ public class UserStats {
         this.userID = userID;
     }
 
-    public Integer getAccuracy() {
-        return accuracy;
+    public Integer getDoneFlashcards() {
+        return doneFlashcards;
     }
 
-    public void setAccuracy(Integer accuracy) {
-        this.accuracy = accuracy;
+    public void setDoneFlashcards(Integer doneFlashcards) {
+        this.doneFlashcards = doneFlashcards;
+    }
+
+    public Integer getCorrectFlashcards() {
+        return correctFlashcards;
+    }
+
+    public void setCorrectFlashcards(Integer correctFlashcards) {
+        this.correctFlashcards = correctFlashcards;
     }
 
     public Integer getLearnedNum() {
@@ -65,5 +79,21 @@ public class UserStats {
 
     public void setTimeLogs(List<TimeLogs> timeLogs) {
         this.timeLogs = timeLogs;
+    }
+
+    public void addTimeLog(TimeLogs timeLogs) {
+        this.timeLogs.add(timeLogs);
+    }
+
+    public UserStats convertFromDTO(SetStatsDTO dto) {
+        this.userID = dto.getUserID();
+        this.doneFlashcards = dto.getDoneFlashcards();
+        this.correctFlashcards = dto.getCorrectFlashcards();
+        this.learnedNum = dto.getLearned();
+        TimeLogs timeLog = new TimeLogs();
+        timeLog.setMinutes(dto.getRecordedTime());
+        timeLog.setDate(LocalDate.now());
+        timeLogs.add(timeLog);
+        return this;
     }
 }
