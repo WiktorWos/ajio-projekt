@@ -1,6 +1,6 @@
 package com.ajio.stats.service;
 
-import com.ajio.stats.dto.SetStatsDTO;
+import com.ajio.stats.dto.UserStatsDTO;
 import com.ajio.stats.dto.UserStatsResponseDTO;
 import com.ajio.stats.entity.TimeLogs;
 import com.ajio.stats.entity.UserStats;
@@ -66,7 +66,7 @@ public class UserStatsService {
                 .orElseThrow(NoSuchElementException::new);
     }
 
-    public void setUserStats(SetStatsDTO dto) {
+    public void setUserStats(UserStatsDTO dto) {
         UserStats stats = userStatsRepo.findByUserID(dto.getUserID());
         if(stats == null) {
             stats = new UserStats();
@@ -77,7 +77,7 @@ public class UserStatsService {
         userStatsRepo.save(stats);
     }
 
-    private UserStats updateStats(SetStatsDTO dto, UserStats stats) {
+    private UserStats updateStats(UserStatsDTO dto, UserStats stats) {
         stats.setCorrectFlashcards(stats.getCorrectFlashcards() + dto.getCorrectFlashcards());
         stats.setDoneFlashcards(stats.getDoneFlashcards() + dto.getDoneFlashcards());
         stats.setLearnedNum(stats.getLearnedNum() + dto.getLearned());

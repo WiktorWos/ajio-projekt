@@ -1,6 +1,5 @@
 package com.ajio.stats.entity;
 
-import com.ajio.stats.dto.SetStatsDTO;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;

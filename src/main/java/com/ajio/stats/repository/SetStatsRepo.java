@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SetStatsRepo extends JpaRepository<SetStats, Long> {
+    SetStats findBySetID(Long setID);
 }

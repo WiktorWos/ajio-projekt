@@ -2,20 +2,24 @@ package com.ajio.stats.dto;
 
 import javax.validation.constraints.NotNull;
 
-public class SetStatsDTO {
+public class UserStatsDTO {
     @NotNull
-    private Long setID;
+    private Long userID;
     @NotNull
     private Integer doneFlashcards;
     @NotNull
     private Integer correctFlashcards;
+    @NotNull
+    private Integer learned;
+    @NotNull
+    private Integer recordedTime;
 
-    public Long getSetID() {
-        return setID;
+    public Long getUserID() {
+        return userID;
     }
 
-    public void setSetID(Long setID) {
-        this.setID = setID;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public Integer getDoneFlashcards() {
@@ -32,5 +36,21 @@ public class SetStatsDTO {
 
     public void setCorrectFlashcards(Integer correctFlashcards) {
         this.correctFlashcards = correctFlashcards;
+    }
+
+    public Integer getLearned() {
+        return learned;
+    }
+
+    public void setLearned(Integer learned) {
+        this.learned = learned;
+    }
+
+    public Integer getRecordedTime() {
+        return recordedTime;
+    }
+
+    public void setRecordedTime(Integer recordedTime) {
+        this.recordedTime = recordedTime;
     }
 }

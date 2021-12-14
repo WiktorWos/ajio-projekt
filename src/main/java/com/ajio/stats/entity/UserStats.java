@@ -1,6 +1,6 @@
 package com.ajio.stats.entity;
 
-import com.ajio.stats.dto.SetStatsDTO;
+import com.ajio.stats.dto.UserStatsDTO;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -85,7 +85,7 @@ public class UserStats implements Serializable {
         this.timeLogs.add(timeLogs);
     }
 
-    public UserStats convertFromDTO(SetStatsDTO dto) {
+    public UserStats convertFromDTO(UserStatsDTO dto) {
         this.userID = dto.getUserID();
         this.doneFlashcards = dto.getDoneFlashcards();
         this.correctFlashcards = dto.getCorrectFlashcards();
